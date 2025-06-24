@@ -60,9 +60,44 @@ class MyWindow(QMainWindow):
         layout.addWidget(button3)
 
         central_widget.setLayout(layout)
+    def error_window(message):
+        msg_box = QMessageBox()
+        msg_box.setText("error")
+        msg_box.informativeText(message)
+        msg_box.setWindowTitle("Error")
+        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
+        print("error")
 
     def Work_on_photo(self):
-        print("photo")
+        print("start work")
+        end = 1
+        num1 = self.star_photo_en
+        num2 = self.end_photo_en
+        print(num1, num2)
+        try:
+            number1 = int(num1)
+            number2 = int(num2)
+            if (number1 >= number2) | (number1 < 0):
+                end = 0
+                #error
+                #self.show_error_diagnostic("Error","don't correct number")
+        except:
+            end = 0
+            # error
+            print("error don't correct number")
+            #self.show_error_diagnostic("Error","Need write number !!!")
+        if end == 1:
+            ## run code
+            # Get the text from the entry fields
+            # text1 = self.entry1.get_text()
+#will be work #script_pho.script_get(BASE_DIR,number1, number2)
+            ## run
+            # complite = Gtk.MessageDialog(parent=self, flags=0, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.OK, text="Done")
+            # complite.format_secondary_text("done work")
+            # complite.run()
+            # complite.destroy()
+            print(f"end work")
+
     def Work_on_order(self):
         print("pull")
     def Work_on_describe(self, entry_number):
@@ -81,37 +116,7 @@ class MyWindow(QMainWindow):
 
 
 # class MyWindow(Gtk.Window):
-#     def __init__(self):
-#         super().__init__(title="Get data")
-#         self.set_default_size(400, 400)
-#         # Create a vertical box to hold the widgets
-#         vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
-#         self.add(vbox)
-#
-#         # Create two entry fields
-#         self.star_photo = Gtk.Entry()
-#         vbox.pack_start(self.star_photo, True, True, 0)
-#
-#         self.end_photo = Gtk.Entry()
-#         vbox.pack_start(self.end_photo, True, True, 0)
-#
-#         # Button photo
-#         get_photo = Gtk.Button(label="Get photo")
-#         get_photo.connect("clicked", self.Work_on_photo)
-#         vbox.pack_start(get_photo, True, True, 0)
-#
-#         # Button order
-#         Get_order = Gtk.Button(label="Get order photo")
-#         Get_order.connect("clicked", self.Work_on_order)
-#         vbox.pack_start(Get_order, True, True, 0)
-#
-#         # Button desribe
-#         Get_describe = Gtk.Button(label="Get describe")
-#         Get_describe.connect("clicked", self.Work_on_describe)
-#         vbox.pack_start(Get_describe, True, True, 0)
-#         # Show all widgets
-#         self.show_all()
-#
+
 #     def Work_on_photo(self, button):
 #         print("start work")
 #         end = 1
