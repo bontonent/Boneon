@@ -59,14 +59,10 @@ class MyWindow(QMainWindow):
         layout.addWidget(button2)
         layout.addWidget(button3)
 
+
         central_widget.setLayout(layout)
-    def error_window(message):
-        msg_box = QMessageBox()
-        msg_box.setText("error")
-        msg_box.informativeText(message)
-        msg_box.setWindowTitle("Error")
-        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
-        print("error")
+    def error_window(self,work):
+        button = QMessageBox.critical(self,"Error",work, buttons = QMessageBox.StandardButton.Discard)
 
     def Work_on_photo(self):
         print("start work")
@@ -79,13 +75,10 @@ class MyWindow(QMainWindow):
             number2 = int(num2)
             if (number1 >= number2) | (number1 < 0):
                 end = 0
-                #error
-                #self.show_error_diagnostic("Error","don't correct number")
+                self.error_window("Don't correct number")
         except:
             end = 0
-            # error
-            print("error don't correct number")
-            #self.show_error_diagnostic("Error","Need write number !!!")
+            self.error_window("Need write numbers")
         if end == 1:
             ## run code
             # Get the text from the entry fields
@@ -100,6 +93,12 @@ class MyWindow(QMainWindow):
 
     def Work_on_order(self):
         print("pull")
+        print("start work")
+        # Work main element
+        photo_order.order(BASE_DIR)
+        print("end work")
+
+
     def Work_on_describe(self, entry_number):
         print("describe")
 
@@ -107,6 +106,13 @@ class MyWindow(QMainWindow):
         self.star_photo_en = entry_number
     def end_text_edited(self, entry_number):
         self.end_photo_en = entry_number
+    # def show_error_diagnostic(self, title, message):
+    #     dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,Gtk.ButtonsType.OK, title)
+    #     dialog.format_secondary_text(message)
+    #     dialog.run()
+    #     dialog.destroy()
+
+
 
     # def Window():
     #     app = QApplication(sys.argv)
@@ -144,14 +150,7 @@ class MyWindow(QMainWindow):
 #             print(f"end work")
 #
 #     def Work_on_order(self, button):
-#         print("start work")
-#         # Work main element
-#         photo_order.order(BASE_DIR)
 #
-#         complite = Gtk.MessageDialog(  parent=self, flags=0, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.OK, text="Done")
-#         complite.format_secondary_text("done work")
-#         complite.run()
-#         complite.destroy()
 #     print("end work")
 #
 #     def Work_on_describe(self, button):
