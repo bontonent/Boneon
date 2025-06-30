@@ -4,8 +4,8 @@ import requests
 import os
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
-BASE_DIR = BASE_DIR
 # good work themselves in scrapy crawl shop
+#from script_get.spiders import get_url
 from script_get.spiders import get_url
 print(BASE_DIR)
 BASE_DIR1 = BASE_DIR.parent.parent
@@ -16,7 +16,6 @@ BASE_DIR1 = BASE_DIR.parent.parent
 
 df_csv = pd.read_csv(BASE_DIR1/"temp/num.csv")
 BASE_DIR = BASE_DIR.parent
-#BASE_DIR = df_csv['number'][2]
 df_get = pd.read_excel(BASE_DIR.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
 
 error_element = []
@@ -61,8 +60,8 @@ class ShopSpider(scrapy.Spider):
             u = 0
             for photo in photos:
                 temp = "".join(("DD ", df_get['Main num'][self.i], "-kol-", str(u)))
-
                 if u < int(self.num1):
+                    u = u + 1
                     continue
                 u = u + 1
                 # max element

@@ -3,20 +3,19 @@ import scrapy
 import pandas as pd
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
-BASE_DIR = BASE_DIR.parent
 # good work themselves in scrapy crawl shop
 from script_get.spiders import get_url
 BASE_DIR1 = BASE_DIR
 ## get new excel file(of if you don't want remove past excel)
-df_get = pd.read_excel(BASE_DIR.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
+df_get = pd.read_excel(BASE_DIR.parent.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
 
 ## get new excel file(of if you don't want remove past excel)
 df = pd.DataFrame(
     columns=['code', 'name', 'ungroup', 'group', 'weight', 'height', 'width', 'length', 'volume', 'describe', 'model'])
-df.to_excel(BASE_DIR.parent/'describe.xlsx', index=False)
+df.to_excel(BASE_DIR.parent.parent/'describe.xlsx', index=False)
 error_element = []
 try:
-    df_error = pd.read_excel(BASE_DIR.parent/"describe.xlsx", sheet_name = 'Error', engine="openpyxl")
+    df_error = pd.read_excel(BASE_DIR.parent.parent/"describe.xlsx", sheet_name = 'Error', engine="openpyxl")
 except:
     df_error = pd.DataFrame(columns=['error'])
 i = -1
@@ -59,13 +58,11 @@ class DescribeSpider(scrapy.Spider):
             new_name = ""
             new_ungroop = ""
             new_group = ""
-
             ##nums
             nums = response.css('li.MuiBreadcrumbs-li span::attr(data-text)')
 
             ##weight
-            sizes = response.css(
-                'body div div main section div div div div div div div div div div div div::text').getall()
+            sizes = response.css('body div div main section div div div div div div div div div div::text').getall()
             for size in range(len(sizes)):
                 if sizes[size] == "Weight":
                     weight = sizes[size + 1]
@@ -110,8 +107,8 @@ class DescribeSpider(scrapy.Spider):
                 'model': mod_tem
             }])
             ##save data in excel file
-            art = load_workbook(BASE_DIR.parent/"describe.xlsx")
-            writer = pd.ExcelWriter(BASE_DIR.parent/'describe.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
+            art = load_workbook(BASE_DIR.parent.parent/"describe.xlsx")
+            writer = pd.ExcelWriter(BASE_DIR.parent.parent/'describe.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
             writer.art = art
             startrow = writer.art.active.max_row
             new_row.to_excel(writer, index=False, header=False, startrow=startrow)

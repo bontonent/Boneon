@@ -1,10 +1,12 @@
 import os
-from scrapy.crawler import CrawlerProcess
-from script_get.script_get.spiders.describe import DescribeSpider
+try:
+    from scrapy.crawler import CrawlerProcess
+    from script_get.spiders.describe import DescribeSpider
 
-from scrapy.settings import Settings
-import script_get.settings as project_settings
-
+    from scrapy.settings import Settings
+    import script_get.settings as project_settings
+except:
+    print("Need VPN")
 #from script_get.spiders.shop import ExampleSpider
 
 def get_des(BASE_DIR):
@@ -15,7 +17,6 @@ def get_des(BASE_DIR):
     process = CrawlerProcess(settings=settings)
     process.crawl(DescribeSpider)
     process.start()
-
 
     os.chdir(BASE_DIR/".")
 

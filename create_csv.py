@@ -16,8 +16,6 @@ df.loc[len(df)] = {'number': number2}
 # data to csv file
 df.to_csv(BASE_DIR1/'temp/num.csv')
 
-
-#df = pd.read_pickle(BASE_DIR1/'./temp/num.pkl')
 #print(df.head())
 
 
