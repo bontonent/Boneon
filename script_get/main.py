@@ -1,14 +1,33 @@
-from PyQt6.QtGui import QEnterEvent
+from PyQt6.QtGui import QEnterEvent, QIcon
 import photo_order
 import os
 import pandas as pd
+# correct where we are
 from pathlib import Path
-import script_pho
-import script_des
-
 BASE_DIR = Path(__file__).resolve().parent
 BASE_DIR1 = BASE_DIR / "script_get"
 os.chdir(BASE_DIR1)
+#create all nessesary file if don't have
+try:
+    os.mkdir(BASE_DIR1.parent.parent/"photo")
+    print("created")
+except:
+    print("don't need create directory photo")
+try:
+    pd.read_excel(BASE_DIR1.parent.parent/"art_photo.xlsx")
+except:
+    import PyQt6
+    from PyQt6 import QtWidgets
+
+    app = QtWidgets.QApplication([])
+
+    error_dialog = QtWidgets.QErrorMessage()
+    error_dialog.setWindowTitle("Error")
+    error_dialog.showMessage("Don't have art_photo.xlsx")
+    app.exec()
+    print("Need VPN")
+import script_pho
+import script_des
 
 df = pd.DataFrame(columns=['number'])
 df.loc[len(df)] = {'number': 0}
@@ -28,16 +47,25 @@ class MyWindow(QMainWindow):
         self.end_photo_en = 0
         #main
         super().__init__()
-        self.setWindowTitle("Get-data-from-Shop-Deere")
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
         self.setGeometry(200, 200, 300, 400)
+        self.setWindowIcon(QIcon(str(BASE_DIR1.parent/'temp/ico.png')))
+        self.setWindowTitle("Boneon")
         layout = QVBoxLayout()
+        # describe first editor
+        label1 = QLabel(self)
+        label1.setText("Вставте в поле значення першого елементу(найменьше 0)")
+        label1.setFixedHeight(12)
         #entry for first number photo
         star_photo = QLineEdit()
         star_photo.setMaxLength(3)
         star_photo.setPlaceholderText("Enter number first photo")
         star_photo.textEdited.connect(self.star_text_edited)
+        # describe first editor
+        label2 = QLabel(self)
+        label2.setText("Вставте в поле значення останнього елементу")
+        label2.setFixedHeight(10)
         # entry for end number photo
         end_photo = QLineEdit()
         end_photo.setMaxLength(3)
@@ -53,13 +81,14 @@ class MyWindow(QMainWindow):
         button3 = QPushButton("Get describe")
         button3.clicked.connect(self.Work_on_describe)
         # All element in place
+        layout.addWidget(label1)
         layout.addWidget(star_photo)
+        layout.addWidget(label2)
         layout.addWidget(end_photo)
-        #layout.addItem(QSpacerItem(40,20,QSizePolicy.Expanding,QSizePolicy.Minimum))
+        # add button
         layout.addWidget(button1)
         layout.addWidget(button2)
         layout.addWidget(button3)
-
         central_widget.setLayout(layout)
     def error_window(self, messanger):
         button = QMessageBox.critical(self,"Error", messanger, buttons = QMessageBox.StandardButton.Close)

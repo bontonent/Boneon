@@ -16,11 +16,11 @@ BASE_DIR1 = BASE_DIR.parent.parent
 
 df_csv = pd.read_csv(BASE_DIR1/"temp/num.csv")
 BASE_DIR = BASE_DIR.parent
-df_get = pd.read_excel(BASE_DIR.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
+df_get = pd.read_excel(BASE_DIR.parent.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
 
 error_element = []
 try:
-    df_error = pd.read_excel(BASE_DIR.parent/"art_photo.xlsx", sheet_name = 'Error', engine="openpyxl")
+    df_error = pd.read_excel(BASE_DIR.parent.parent/"art_photo.xlsx", sheet_name = 'Error', engine="openpyxl")
     error_element = df_error['error']
 except:
     df_error = pd.DataFrame(columns=['error'])
@@ -70,7 +70,7 @@ class ShopSpider(scrapy.Spider):
                 print(photo)
                 url = requests.get(photo)
                 f"./../photo/DD {code}.jpg"
-                with open(BASE_DIR.parent/f"photo/{str(temp)}.jpg", 'wb') as f:
+                with open(BASE_DIR.parent.parent/f"photo/{str(temp)}.jpg", 'wb') as f:
                     f.write(url.content)
             # while if don't end element
             while self.i < len(df_get)-1:
@@ -83,10 +83,10 @@ class ShopSpider(scrapy.Spider):
                     self.i = self.i + 1
                     yield response.follow(next_page, callback=self.parse)
                     break
-
-            with pd.ExcelWriter(BASE_DIR.parent/"art_photo.xlsx") as writer:
+            with pd.ExcelWriter(BASE_DIR.parent.parent/"art_photo.xlsx") as writer:
                 df_get.to_excel(writer, sheet_name='Element', index=False)
                 df_error.to_excel(writer, sheet_name='Error', index=False)
+        # add data to excel Error
         else:
             df_error.loc[len(df_error)] = {'error' : df_get['Main num'][self.i]}
             while self.i < len(df_get) - 1:

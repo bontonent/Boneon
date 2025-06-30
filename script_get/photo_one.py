@@ -7,7 +7,7 @@ import os
 def get_photo(BASE_DIR):
     BASE_DIR1 = BASE_DIR.parent
     os.chdir(BASE_DIR1)
-    df = pd.read_excel(BASE_DIR1/"art_photo.xlsx", sheet_name="Element", engine="openpyxl")
+    df = pd.read_excel(BASE_DIR1.parent/"art_photo.xlsx", sheet_name="Element", engine="openpyxl")
 
     for form in range(len(df[:])):
         print(form + 1," ",len(df))
@@ -54,7 +54,7 @@ def get_photo(BASE_DIR):
                             print(kol['url'])
                             url = kol['url']
                             response = requests.get(url)
-                            with open(BASE_DIR1/f"photo/DD {code}-kol-0.jpg",
+                            with open(BASE_DIR1.parent/f"photo/DD {code}-kol-0.jpg",
                                                            "wb") as f:
                                                      f.write(response.content)
         except Exception:
@@ -98,6 +98,6 @@ def get_photo(BASE_DIR):
                             print(kol['url'])
                             url = kol['url']
                             response = requests.get(url)
-                            with open(BASE_DIR1/f"photo/DD {code}-kol-0.jpg",
+                            with open(BASE_DIR1.parent/f"photo/DD {code}-kol-0.jpg",
                                       "wb") as f:
                                 f.write(response.content)

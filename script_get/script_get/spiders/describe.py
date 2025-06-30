@@ -7,15 +7,15 @@ BASE_DIR = Path(__file__).resolve().parent
 from script_get.spiders import get_url
 BASE_DIR1 = BASE_DIR
 ## get new excel file(of if you don't want remove past excel)
-df_get = pd.read_excel(BASE_DIR.parent.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
+df_get = pd.read_excel(BASE_DIR.parent.parent.parent/"art_photo.xlsx", sheet_name = 'Element', engine="openpyxl")
 
 ## get new excel file(of if you don't want remove past excel)
 df = pd.DataFrame(
     columns=['code', 'name', 'ungroup', 'group', 'weight', 'height', 'width', 'length', 'volume', 'describe', 'model'])
-df.to_excel(BASE_DIR.parent.parent/'describe.xlsx', index=False)
+df.to_excel(BASE_DIR.parent.parent.parent/'describe.xlsx', index=False)
 error_element = []
 try:
-    df_error = pd.read_excel(BASE_DIR.parent.parent/"describe.xlsx", sheet_name = 'Error', engine="openpyxl")
+    df_error = pd.read_excel(BASE_DIR.parent.parent.parent/"describe.xlsx", sheet_name = 'Error', engine="openpyxl")
 except:
     df_error = pd.DataFrame(columns=['error'])
 i = -1
@@ -109,8 +109,8 @@ class DescribeSpider(scrapy.Spider):
                 'model': mod_tem
             }])
             ##save data in excel file
-            art = load_workbook(BASE_DIR.parent.parent/"describe.xlsx")
-            writer = pd.ExcelWriter(BASE_DIR.parent.parent/'describe.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
+            art = load_workbook(BASE_DIR.parent.parent.parent/"describe.xlsx")
+            writer = pd.ExcelWriter(BASE_DIR.parent.parent.parent/'describe.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
             writer.art = art
             startrow = writer.art.active.max_row
             new_row.to_excel(writer, index=False, header=False, startrow=startrow)
