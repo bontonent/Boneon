@@ -81,12 +81,14 @@ class DescribeSpider(scrapy.Spider):
                 if des_tem == "":
                     des_tem = "".join((des_tem, describe))
                 des_tem = "".join((des_tem, "!!!", describe))
-            models = response.css(
-                'body div div main section div div div div div div div ul li.MuiTypography-root::text').getall()
-            for model in models[:]:
-                if mod_tem == "":
-                    mod_tem = "".join((mod_tem, model))
-                mod_tem = "".join((mod_tem, "!!!", model))
+            # Create Models
+            work_station = ""
+            scripts = response.css("script::text").getall()
+            for script in scripts:
+                if -1 != script.find("window.initializedProductDetailsData"):                work_station = script
+
+            work_start = work_station[work_station.find('models'):]
+            mod_tem =  work_start[:work_start.find('}')].replace('models":[', "").replace(']', "").replace(',', "!!!").replace('"', "")
 
             new_code = nums[3].get()[:nums[3].get().find(':')]
             new_name = nums[3].get().replace("".join((nums[3].get()[:nums[3].get().find(':')], ": ")), "")
