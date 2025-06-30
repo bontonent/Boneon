@@ -1,28 +1,35 @@
+# Create photo_one.py for get data from web-site fast. Get data from search element
+# main instrument requests
 import requests
+#get data from json
 import json
 import pandas as pd
 import time
 import os
 
 def get_photo(BASE_DIR):
+    # BASE_DIR main element for search where we are
     BASE_DIR1 = BASE_DIR.parent
     os.chdir(BASE_DIR1)
+    # Get exel
     df = pd.read_excel(BASE_DIR1.parent/"art_photo.xlsx", sheet_name="Element", engine="openpyxl")
-
+    # Cycle check all data
     for form in range(len(df[:])):
-        print(form + 1," ",len(df))
+
+        # try open web-site
         try:
             code = df['Main num'][form]
             url_end = ""
             url = f"https://shop.deere.com/bff/v1/search?query={code}&page=1&size=24&productType=all&countryCode=US"
-
-            print(code)
+            #our progres
+            print("element ", form + 1,"/",len(df),"Code check: ",code)
             payload = json.dumps({
                 "facets": [],
                 "sortParam": "RELEVANCE",
                 "nonOnBoardedDealer": False,
                 "enableQueryCorrection": True
             })
+            # headers from web-site
             headers = {
                 'accept': 'application/json, text/plain, */*',
                 'accept-language': 'en-US',
@@ -42,21 +49,22 @@ def get_photo(BASE_DIR):
             }
 
             response = requests.request("POST", url, headers=headers, data=payload)
-            work = response.json()
-
+            # get data complete.
+            elements = response.json()
             values = "None"
-            for key in work["products"]:
-                if key["code"] == code:
+            # search necessary data
+            for element in elements["products"]:
+                if element["code"] == code:
                     values = "Don't have photo"
-                    keycode = key["code"]
-                    for kol in key['assets']:
-                        if kol["resolution"] == '1200Wx1200H':
-                            print(kol['url'])
-                            url = kol['url']
+                    keycode = element["code"]
+                    for url_photo in element['assets']:
+                        if url_photo["resolution"] == '1200Wx1200H':
+                            print(url_photo['url'])
+                            url = url_photo['url']
                             response = requests.get(url)
-                            with open(BASE_DIR1.parent/f"photo/DD {code}-kol-0.jpg",
-                                                           "wb") as f:
+                            with open(BASE_DIR1.parent/f"photo/DD {code}-kol-0.jpg","wb") as f:
                                                      f.write(response.content)
+        # make all again if crash first(if bad VPN crash can be all time)
         except Exception:
             time.sleep(10)
             url = f"https://shop.deere.com/bff/v1/search?query={code}&page=1&size=24&productType=all&countryCode=US"
@@ -88,16 +96,18 @@ def get_photo(BASE_DIR):
             }
 
             response = requests.request("POST", url, headers=headers, data=payload)
-            work = response.json()
-            for key in work["products"]:
-                if key["code"] == code:
+            # get data complete.
+            elements = response.json()
+            values = "None"
+            # search necessary data
+            for element in elements["products"]:
+                if element["code"] == code:
                     values = "Don't have photo"
-                    keycode = key["code"]
-                    for kol in key['assets']:
-                        if kol["resolution"] == '1200Wx1200H':
-                            print(kol['url'])
-                            url = kol['url']
+                    keycode = element["code"]
+                    for url_photo in element['assets']:
+                        if url_photo["resolution"] == '1200Wx1200H':
+                            print(url_photo['url'])
+                            url = url_photo['url']
                             response = requests.get(url)
-                            with open(BASE_DIR1.parent/f"photo/DD {code}-kol-0.jpg",
-                                      "wb") as f:
+                            with open(BASE_DIR1.parent / f"photo/DD {code}-kol-0.jpg", "wb") as f:
                                 f.write(response.content)

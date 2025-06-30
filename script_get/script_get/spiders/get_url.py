@@ -1,17 +1,19 @@
+## Script for get data from Json file. With algorithm create url
 from pydoc import replace
 import requests
 import json
 
 def get(code):
     url_end = ""
+    # search in web-site with code
     url = f"https://shop.deere.com/bff/v1/search?query={code}&page=1&size=24&productType=all&countryCode=US"
-
     payload = json.dumps({
       "facets": [],
       "sortParam": "RELEVANCE",
       "nonOnBoardedDealer": False,
       "enableQueryCorrection": True
     })
+    # headers from web-site
     headers = {
       'accept': 'application/json, text/plain, */*',
       'accept-language': 'en-US',
@@ -31,15 +33,16 @@ def get(code):
     }
     #connect json element from site
     response = requests.request("POST", url, headers=headers, data=payload)
-    work = response.json()
+    label_keys = response.json()
     #get element name for create url
-    for key in work["products"]:
+    for key in label_keys["products"]:
         if key["code"] == code:
             keycode = key["name"]
+            # Create url
             code_space = "".join((code,":"))
             code_space_2 = "".join((code, ": "))
             keycode_url = ("".join((replace(replace(replace(keycode,code_space,""), " ", "-"),",","%2C"),f"/p/{code}"))).replace("(","-").replace(")","-")
             end_url = "".join((code,"%3A",keycode_url))
             url_end = "".join(("https://shop.deere.com/us/product/",end_url))
-
+    # return url
     return url_end

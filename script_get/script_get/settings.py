@@ -39,6 +39,7 @@ ROBOTSTXT_OBEY = True
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
+## OUR Agent Hero!!!
 DEFAULT_REQUEST_HEADERS = {
   'accept': 'application/json, text/plain, */*',
   'accept-language': 'en-US',

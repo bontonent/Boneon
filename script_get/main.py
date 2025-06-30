@@ -1,3 +1,4 @@
+# Main.py for call visual PyQt and call functions
 from PyQt6.QtGui import QEnterEvent, QIcon
 import photo_order
 import os
@@ -7,15 +8,18 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 BASE_DIR1 = BASE_DIR / "script_get"
 os.chdir(BASE_DIR1)
-#create all nessesary file if don't have
+#create all necessary file if don't have
 try:
+    #directory photo
     os.mkdir(BASE_DIR1.parent.parent/"photo")
     print("created")
 except:
-    print("don't need create directory photo")
+    pass
 try:
+    # excel file art_photo
     pd.read_excel(BASE_DIR1.parent.parent/"art_photo.xlsx")
 except:
+    #view error without art_photo(it is main file for using)
     import PyQt6
     from PyQt6 import QtWidgets
 
@@ -26,16 +30,14 @@ except:
     error_dialog.showMessage("Don't have art_photo.xlsx")
     app.exec()
     print("Need VPN")
+# Main library for call scrapy. When call run scrapy script(help check, we with VPN or without)
 import script_pho
 import script_des
-
+# create file for understand start, end photo
 df = pd.DataFrame(columns=['number'])
 df.loc[len(df)] = {'number': 0}
 df.loc[len(df)] = {'number': 0}
 df.to_csv(BASE_DIR1.parent/'temp/num.csv')
-# stop
-# import script_des
-# import script_pho
 
 #Start work with QT6
 from PyQt6.QtCore import *
@@ -90,20 +92,23 @@ class MyWindow(QMainWindow):
         layout.addWidget(button2)
         layout.addWidget(button3)
         central_widget.setLayout(layout)
+    #error message
     def error_window(self, messanger):
         button = QMessageBox.critical(self,"Error", messanger, buttons = QMessageBox.StandardButton.Close)
+    #info message
     def information_windows(self, messanger):
         button = QMessageBox.information(self, "Information", messanger, buttons=QMessageBox.StandardButton.Close)
-
-
+    #call script photo
     def Work_on_photo(self):
-        print("start work")
+        print("Start work button photo")
         end = 1
         number1 = 0 ;number2=0
+        # get data from edit fields
         num1 = self.star_photo_en
         num2 = self.end_photo_en
         print(num1, num2)
         try:
+            # check such write,
             number1 = int(num1)
             number2 = int(num2)
             df1 = pd.DataFrame(columns=['number'])
@@ -117,112 +122,30 @@ class MyWindow(QMainWindow):
             end = 0
             self.error_window("Need write numbers")
         if end == 1:
-
+            # call script
             script_pho.script_get(BASE_DIR,number1, number2)
-
-
             self.information_windows("Complete work with create photo/..")
 
+    # Create excel file pull photo
     def Work_on_order(self):
-        print("start work")
-        # Work main element
+        print("Start work button order")
+        # call py script
         photo_order.order(BASE_DIR)
         self.information_windows("Complete work with create pull_photo.xlsx")
 
-
+    # Call scrapy script for script describe.xlsx
     def Work_on_describe(self, entry_number):
-        print("start work")
+        print("Start work button describe")
         script_des.get_des(BASE_DIR)
         self.information_windows("Complete work with create describe.xlsx")
-
+    # get data from entry fields always
     def star_text_edited(self, entry_number):
         self.star_photo_en = entry_number
     def end_text_edited(self, entry_number):
         self.end_photo_en = entry_number
-    # def show_error_diagnostic(self, title, message):
-    #     dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,Gtk.ButtonsType.OK, title)
-    #     dialog.format_secondary_text(message)
-    #     dialog.run()
-    #     dialog.destroy()
-
-
-
-    # def Window():
-    #     app = QApplication(sys.argv)
-    #     widget = QWidget()
-    #     label = QLabel(widget)
-    #     label.setText("Hello World!")
-
-
-# class MyWindow(Gtk.Window):
-
-#     def Work_on_photo(self, button):
-#         print("start work")
-#         end = 1
-#         num1 = self.star_photo.get_text()
-#         num2 = self.end_photo.get_text()
-#         print(num1, num2)
-#         try:
-#             number1 = int(num1)
-#             number2 = int(num2)
-#             if (number1 >= number2) | (number1 < 0):
-#                 end = 0
-#                 self.show_error_diagnostic("Error","don't correct number")
-#         except:
-#             end = 0
-#             self.show_error_diagnostic("Error","Need write number !!!")
-#
-#         if end == 1:
-#             # Get the text from the entry fields
-#             # text1 = self.entry1.get_text()
-#             script_pho.script_get(BASE_DIR,number1, number2)
-#             complite = Gtk.MessageDialog(parent=self, flags=0, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.OK, text="Done")
-#             complite.format_secondary_text("done work")
-#             complite.run()
-#             complite.destroy()
-#             print(f"end work")
-#
-#     def Work_on_order(self, button):
-
-#
-
-#         print("start work")
-#         # Work main element
-#         photo_order.order(BASE_DIR)
-#
-#         complite = Gtk.MessageDialog(  parent=self, flags=0, message_type=Gtk.MessageType.INFO, buttons=Gtk.ButtonsType.OK, text="Done")
-#         complite.format_secondary_text("done work")
-#         complite.run()
-#         complite.destroy()
-
-#     print("end work")
-#
-#     def Work_on_describe(self, button):
-#
-#         print(f"Start")
-#         script_des.get_des(BASE_DIR)
-#         complite = Gtk.MessageDialog(parent=self, flags=0, message_type=Gtk.MessageType.INFO,
-#                                      buttons=Gtk.ButtonsType.OK, text="Done")
-#         complite.format_secondary_text("done work")
-#         complite.run()
-#         complite.destroy()
-#
-#     def show_error_diagnostic(self, title, message):
-#         dialog = Gtk.MessageDialog(self, 0, Gtk.MessageType.ERROR,Gtk.ButtonsType.OK, title)
-#         dialog.format_secondary_text(message)
-#         dialog.run()
-#         dialog.destroy()
-#
 
 # Create and run the application
 app = QApplication(sys.argv)
 win = MyWindow()
 win.show()
 app.exec()
-
-# # Create and run the application
-# win = MyWindow()
-# win.connect("destroy", Gtk.main_quit)
-# win.show_all()
-# Gtk.main()
-
