@@ -54,7 +54,7 @@ def get_photo(BASE_DIR):
                             print(kol['url'])
                             url = kol['url']
                             response = requests.get(url)
-                            with open(BASE_DIR1/f"photo/DD {code}.jpg",
+                            with open(BASE_DIR1/f"photo/DD {code}-kol-0.jpg",
                                                            "wb") as f:
                                                      f.write(response.content)
         except Exception:
@@ -98,6 +98,6 @@ def get_photo(BASE_DIR):
                             print(kol['url'])
                             url = kol['url']
                             response = requests.get(url)
-                            with open(BASE_DIR1/f"photo/DD {code}.jpg",
+                            with open(BASE_DIR1/f"photo/DD {code}-kol-0.jpg",
                                       "wb") as f:
                                 f.write(response.content)
