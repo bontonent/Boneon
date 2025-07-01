@@ -88,7 +88,7 @@ class ShopSpider(scrapy.Spider):
             # while if don't end element
             # go next element
             while self.i < len(df_get)-1:
-                print(self.i+2, "/", len(df_get))
+                print(self.i + 2, "/", len(df_get)," Element_now: ",code)
                 next_page = get_url.get(df_get['Main num'][self.i + 1])
                 if next_page == "":
                     print("skip")
@@ -105,7 +105,7 @@ class ShopSpider(scrapy.Spider):
             # if error element say error. Here have write error element(in describe don't have)
             df_error.loc[len(df_error)] = {'error' : df_get['Main num'][self.i]}
             while self.i < len(df_get) - 1:
-                print(self.i + 2, "/", len(df_get))
+                print(self.i + 2, "/", len(df_get)," Element_now: ",code)
                 next_page = get_url.get(df_get['Main num'][self.i + 1])
                 if next_page == "":
                     print("skip")

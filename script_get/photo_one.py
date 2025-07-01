@@ -22,7 +22,7 @@ def get_photo(BASE_DIR):
             url_end = ""
             url = f"https://shop.deere.com/bff/v1/search?query={code}&page=1&size=24&productType=all&countryCode=US"
             #our progres
-            print("element ", form + 1,"/",len(df),"Code check: ",code)
+            print(form + 1,"/",len(df),"Element now: ",code)
             payload = json.dumps({
                 "facets": [],
                 "sortParam": "RELEVANCE",
@@ -69,7 +69,7 @@ def get_photo(BASE_DIR):
             time.sleep(10)
             url = f"https://shop.deere.com/bff/v1/search?query={code}&page=1&size=24&productType=all&countryCode=US"
 
-            print(code)
+            print("Try second ",form + 1, "/", len(df), "Element now: ", code)
             payload = json.dumps({
                 "facets": [],
                 "sortParam": "RELEVANCE",
