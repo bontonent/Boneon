@@ -3,6 +3,7 @@ from PyQt6.QtGui import QEnterEvent, QIcon
 import photo_order
 import os
 import pandas as pd
+import sys
 # correct where we are
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
@@ -30,6 +31,7 @@ except:
     error_dialog.showMessage("Don't have art_photo.xlsx")
     app.exec()
     print("Need VPN")
+    sys.exit()
 # Main library for call scrapy. When call run scrapy script(help check, we with VPN or without)
 import script_pho
 import script_des
