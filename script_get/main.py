@@ -59,21 +59,21 @@ class MyWindow(QMainWindow):
         layout = QVBoxLayout()
         # describe first editor
         label1 = QLabel(self)
-        label1.setText("Вставте в поле значення першого елементу(найменьше 0)")
+        label1.setText("Enter first number photo")
         label1.setFixedHeight(12)
         #entry for first number photo
         star_photo = QLineEdit()
         star_photo.setMaxLength(3)
-        star_photo.setPlaceholderText("Enter number first photo")
+        star_photo.setPlaceholderText("(as 0)")
         star_photo.textEdited.connect(self.star_text_edited)
         # describe first editor
         label2 = QLabel(self)
-        label2.setText("Вставте в поле значення останнього елементу")
+        label2.setText("Enter finally number photo")
         label2.setFixedHeight(10)
         # entry for end number photo
         end_photo = QLineEdit()
         end_photo.setMaxLength(3)
-        end_photo.setPlaceholderText("Enter number end photo")
+        end_photo.setPlaceholderText("(as 1,2,3)")
         end_photo.textEdited.connect(self.end_text_edited)
         #for button 1
         button1 = QPushButton("Get photo")
