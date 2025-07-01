@@ -42,7 +42,6 @@ df.loc[len(df)] = {'number': 0}
 df.to_csv(BASE_DIR1.parent/'temp/num.csv')
 
 #Start work with QT6
-from PyQt6.QtCore import *
 from PyQt6.QtWidgets import *
 import sys
 class MyWindow(QMainWindow):
