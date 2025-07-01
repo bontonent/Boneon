@@ -15,33 +15,38 @@
 - All file art_photo.xlsx remove all data what don't need for work.
 ### Example
 ---
-![img_1.png](img_1.png)
+![readme_img_1](readme_img_1.png)
 
 After create file, We can using program
 ### Activate VPN
 ## Open main.exe
 You get error if don't have "art_photo.xlsx","VPN"
-![img.png](img.png)
+![readme_img_2](readme_img_2.png)
+
 ## You have 2 field for write and 3 button
 ### If you want get photo
 1 Write necessary in start field for write (for example 0)
 2 Write in second field for write (for example 1)
 Start get photo(photo in directory photo/.)
 #### for example(0 1)
-![img_2.png](img_2.png)
+![readme_img_3](readme_img_3.png)
+
 In left cmd you can see 1/9,2/9 It is count element complete
 #### for example(0 2)
-![img_3.png](img_3.png)
+![readme_img_4](readme_img_4.png)
+
 In left start load scrapy and same count
 ### if you want get pull photo xlsx
 you need click button "Get order photo"
 after click get pull_photo.xlsx
-![img_4.png](img_4.png)
+![readme_img_5](readme_img_5.png)
+
 remember, if don't have photo in photo/. directory you don't get result
 ### If you want get describe
 you need click button "Get describe"
 after click you get describe.xlsx
-![img_5.png](img_5.png)
+![readme_img_6](readme_img_6.png)
+
 you get describe.xlsx with all describe
 # !!! Can be error
 - if you click twith on "Get describe" or "Get photo", or click one on "Get describe" and "Get photo"
