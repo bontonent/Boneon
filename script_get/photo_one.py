@@ -18,7 +18,7 @@ def get_photo(BASE_DIR):
 
         # try open web-site
         try:
-            code = df['Main num'][form]
+            code = df.iloc[:,0][form]
             url_end = ""
             url = f"https://shop.deere.com/bff/v1/search?query={code}&page=1&size=24&productType=all&countryCode=US"
             #our progres

@@ -25,13 +25,13 @@ except:
 i = -1
 while i < len(df_get) - 1:
     print(i + 2, "/", len(df_get))
-    next_page = get_url.get(df_get['Main num'][i + 1])
+    next_page = get_url.get(df_get.iloc[:,0][i + 1])
     if next_page == "":
         print("skip")
         i = i + 1
     else:
         i = i + 1
-        code = (df_get['Main num'][i])
+        code = (df_get.iloc[:,0][i])
         break
 # With past step we know, we get url for url_element
 url_element = get_url.get(code)
@@ -129,11 +129,11 @@ class DescribeSpider(scrapy.Spider):
             new_row.to_excel(writer, index=False, header=False, startrow=startrow)
             writer._save()
             writer.close()
+            print(self.i + 1, "/", len(df_get), " Element_complete: ", new_code)
             ##go to next element
             while self.i < len(df_get) - 1:
-                print(self.i + 2, "/", len(df_get)," Element_now: ",new_code)
                 # check, have or don't have element get_url
-                next_page = get_url.get(df_get['Main num'][self.i + 1])
+                next_page = get_url.get(df_get.iloc[:,0][self.i + 1])
                 if next_page == "":
                     print("skip")
                     self.i = self.i + 1
@@ -154,11 +154,11 @@ class DescribeSpider(scrapy.Spider):
                                                    })
                     break
         else:
+            print(self.i + 1, "/", len(df_get))
             # if error element say error
             while self.i < len(df_get) - 1:
                 # search return next work element
-                print(self.i + 2, "/", len(df_get))
-                next_page = get_url.get(df_get['Main num'][self.i + 1])
+                next_page = get_url.get(df_get.iloc[:,0][self.i + 1])
                 if next_page == "":
                     print("skip")
                     self.i = self.i + 1

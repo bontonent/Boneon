@@ -8,7 +8,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 # good work themselves in scrapy crawl shop
 from script_get.spiders import get_url
-print(BASE_DIR)
 BASE_DIR1 = BASE_DIR.parent.parent
 # get data first and last numbers photo
 df_csv = pd.read_csv(BASE_DIR1/"temp/num.csv")
@@ -27,13 +26,13 @@ except:
 i = -1
 while i < len(df_get) - 1:
     print(i + 2, "/", len(df_get))
-    next_page = get_url.get(df_get['Main num'][i + 1])
+    next_page = get_url.get(df_get.iloc[:,0][i + 1])
     if next_page == "":
         print("skip")
         i = i + 1
     else:
         i = i + 1
-        code = (df_get['Main num'][i])
+        code = (df_get.iloc[:,0][i])
         break
 # With past step we know, we get url for url_element
 url_element = get_url.get(code)
@@ -69,7 +68,7 @@ class ShopSpider(scrapy.Spider):
             u = 0
             # (write script)
             for photo in photos:
-                temp = "".join(("DD ", df_get['Main num'][self.i], "-kol-", str(u)))
+                temp = "".join(("DD ", df_get.iloc[:,0][self.i], "-kol-", str(u)))
                 # first element can be 0 1.. and we start with it is element
                 if u < int(self.num1):
                     u = u + 1
@@ -87,9 +86,9 @@ class ShopSpider(scrapy.Spider):
                     f.write(url.content)
             # while if don't end element
             # go next element
+            print(self.i + 1, "/", len(df_get), " Element_complete: ", df_get.iloc[:, 0][self.i])
             while self.i < len(df_get)-1:
-                print(self.i + 2, "/", len(df_get)," Element_now: ",code)
-                next_page = get_url.get(df_get['Main num'][self.i + 1])
+                next_page = get_url.get(df_get.iloc[:,0][self.i + 1])
                 if next_page == "":
                     print("skip")
                     self.i = self.i + 1
@@ -103,10 +102,10 @@ class ShopSpider(scrapy.Spider):
         # add data to excel Error
         else:
             # if error element say error. Here have write error element(in describe don't have)
-            df_error.loc[len(df_error)] = {'error' : df_get['Main num'][self.i]}
+            df_error.loc[len(df_error)] = {'error' : df_get.iloc[:,0][self.i]}
+            print(self.i + 1, "/", len(df_get), " Element_complete: ", df_get.iloc[:, 0][self.i])
             while self.i < len(df_get) - 1:
-                print(self.i + 2, "/", len(df_get)," Element_now: ",code)
-                next_page = get_url.get(df_get['Main num'][self.i + 1])
+                next_page = get_url.get(df_get.iloc[:,0][self.i + 1])
                 if next_page == "":
                     print("skip")
                     self.i = self.i + 1

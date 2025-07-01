@@ -7,7 +7,7 @@ def del_cop(BASE_DIR):
     df = pd.read_excel(BASE_DIR.parent/'art_photo.xlsx', sheet_name='Error', engine='openpyxl')
     element = []
     # make column without copy
-    for big_error in df['error']:
+    for big_error in df.iloc[:,0]:
         index = True
         for new_error in element:
             if str(big_error) == str(new_error):

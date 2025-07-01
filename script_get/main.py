@@ -106,7 +106,6 @@ class MyWindow(QMainWindow):
         # get data from edit fields
         num1 = self.star_photo_en
         num2 = self.end_photo_en
-        print(num1, num2)
         try:
             # check such write,
             number1 = int(num1)
