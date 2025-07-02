@@ -2,9 +2,9 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+.idea
 .env
 .venv/
-.idea/
 *.jpg
 describe.xlsx
 pull_photo.xlsx

@@ -135,7 +135,7 @@ class DescribeSpider(scrapy.Spider):
                 # check, have or don't have element get_url
                 next_page = get_url.get(df_get.iloc[:,0][self.i + 1])
                 if next_page == "":
-                    print("skip")
+                    print(self.i + 1, "/", len(df_get)," skip")
                     self.i = self.i + 1
                 else:
                     self.i = self.i + 1
