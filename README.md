@@ -1,12 +1,12 @@
 # Project "Boneon"
 -----
 ### For using project need
-- VPN on all system(not Opera VPN)
-- Windows(have Linux, but don't update function)
-[URL to linux project](https://github.com/bontonent/Upgate_get_photo/tree/master/script_get/dist/main)
+- VPN on all system (not Opera VPN)
+- Windows (have Linux, but don't update function)[to linux project](https://github.com/bontonent/Upgate_get_photo/tree/master/script_get/dist/main)
 - 100MB on program and memory on file: .xlsx, .jpg
-- Internet +-1 MB on second(if very low, can be crash)
+- Internet +-1 MB on second (if very low, can be crash)
 
+#### **!open program and create "art_photo.xlsx" in directory ./program/Windows/main!** 
 ### For using need "art_photo.xlsx"
 #### in art_photo.xlsx
 - Need sheet_name "Element"
@@ -14,10 +14,10 @@
   (Remember first row without an Article, you maybe create title for column)
 - All file art_photo.xlsx remove all data what don't need for work.
 ### Example
----
+-----
+After create file, We can using program
 ![readme_img_1](readme_img_1.png)
 
-After create file, We can using program
 ### Activate VPN
 ## Open main.exe
 You get error if don't have "art_photo.xlsx","VPN"
@@ -49,7 +49,7 @@ after click you get describe.xlsx
 
 you get describe.xlsx with all describe
 # !!! Can be error
-- if you click twith on "Get describe" or "Get photo", or click one on "Get describe" and "Get photo"
+- if you activate twice "Get describe" or "Get photo", or activate "Get describe" and "Get photo"
 ## Solution:
 - you need close and open program
-  (specific scrapy)
+  (specific using scrapy)
