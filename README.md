@@ -17,7 +17,7 @@
 ### Example
 After create file, We can using program
 
-![readme_img_1](photo readme/readme_img_1.png)
+![readme_img_1]('photo readme'/readme_img_1.png)
 
 ### Activate VPN
 ## Open main.exe
