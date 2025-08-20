@@ -2,7 +2,7 @@
 -----
 ### For using project need
 - VPN on all system (not Opera VPN)
-- Windows (have Linux, but don't update function)[to linux project](https://github.com/bontonent/Upgate_get_photo/tree/master/script_get/dist/main)
+- Windows (you can open with vine on linux system)
 - 100MB on program and memory on file: .xlsx, .jpg
 - Internet +-1 MB on second (if very low, can be crash)
 
@@ -31,26 +31,22 @@ You get error if don't have "art_photo.xlsx","VPN"
 2 Write in second field for write (for example 1)
 Start get photo(photo in directory photo/.)
 #### for example(0 1)
-
 ![readme_img_3](photo readme/readme_img_3.png)
 
 In left cmd you can see 1/9,2/9 It is count element complete
 #### for example(0 2)
-
 ![readme_img_4](photo readme/readme_img_4.png)
 
 In left start load scrapy and same count
 ### if you want get pull photo xlsx
 you need click button "Get order photo"
 after click get pull_photo.xlsx
-
 ![readme_img_5](photo readme/readme_img_5.png)
 
 remember, if don't have photo in photo/. directory you don't get result
 ### If you want get describe
 you need click button "Get describe"
 after click you get describe.xlsx
-
 ![readme_img_6](photo readme/readme_img_6.png)
 
 you get describe.xlsx with all describe
@@ -61,5 +57,4 @@ you get describe.xlsx with all describe
   (specific using scrapy)
 
 # The program
-
 [URL MEGA](https://mega.nz/file/WJM0xAwI#Ct1bmMzpNfQ_h6QunNyXn3y7Bi_MQPycASQatNBYk6k)
