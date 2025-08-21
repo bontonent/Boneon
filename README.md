@@ -1,5 +1,5 @@
 # Project "Boneon"
------
+------
 ### For using project need
 - VPN on all system (not Opera VPN)
 - Windows (you can open with vine on linux system)
@@ -56,5 +56,22 @@ you get describe.xlsx with all describe
 - you need close and open program
   (specific using scrapy)
 
+# Example how work
+## I have
+![img.png](photo_readme/img7.png)
+
+## I get
+
+- Describe
+
+![img.png](photo_readme/img9.png)
+
+- Photo
+
+![img.png](photo_readme/img8.png)
+
+- Pull photo
+
+![img.png](photo_readme/img10.png)
 # The program
 [URL MEGA](https://mega.nz/file/WJM0xAwI#Ct1bmMzpNfQ_h6QunNyXn3y7Bi_MQPycASQatNBYk6k)
